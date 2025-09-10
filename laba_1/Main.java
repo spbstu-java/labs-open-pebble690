@@ -5,7 +5,6 @@ public class Main
     public static void main(String[] args)
     {
         Scanner scanner = new Scanner(System.in);
-
         Hero hero = new Hero("Artem");
 
         while (true)
@@ -16,7 +15,18 @@ public class Main
             System.out.println("3 - Fly");
             System.out.println("0 - Exit");
 
-            int choice = scanner.nextInt();
+            String input = scanner.nextLine().trim();
+            int choice;
+
+            try
+            {
+                choice = Integer.parseInt(input);
+            }
+            catch (NumberFormatException e)
+            {
+                System.out.println("Wrong input! Please enter a number.");
+                continue;
+            }
 
             if (choice == 0)
             {
@@ -42,10 +52,20 @@ public class Main
             }
 
             System.out.print("Enter your departure point: ");
-            String from = scanner.next();
+            String from = scanner.nextLine().trim();
+            if (from.isEmpty())
+            {
+                System.out.println("Departure point cannot be empty!");
+                continue;
+            }
 
             System.out.print("Enter your destination: ");
-            String to = scanner.next();
+            String to = scanner.nextLine().trim();
+            if (to.isEmpty())
+            {
+                System.out.println("Destination cannot be empty!");
+                continue;
+            }
 
             hero.move(from, to);
         }
